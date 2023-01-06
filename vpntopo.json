@@ -1,0 +1,35 @@
+{
+  "extension": {
+	  "name": "Show VPN topology on gateways",
+	  "version": "0.2",
+	  "description": "A SmartConsole Extension to show the VPN topology in a separate tab",
+	  "author": "Danny Jung",
+	  "email": "cp@dannyjung.de",
+	  "product-url": "https://community.checkpoint.com/t5/SmartConsole-Extensions/SmartConsole-Extension-Show-VPN-topology-on-gateways/m-p/81719",
+	  "provider": "dannyjung.de",
+	  "license": "GPL",
+	  "extension-version-requirements": {
+		  "minimum-version": "1.2"
+    }
+  },
+  "locations": [
+    {
+		"location": "details-pane",
+		"relevant-types": ["gateways"],
+		"ui-element": {
+			"type": "tab",
+			"caption": "VPN Topology",
+			"tooltip": "Display VPN topology on gateways",
+			"action": {
+				"details-level": "full",
+				"method": "get",
+				"trigger-id": "gateways-details-pane",
+				"url": "vpntopo.htm"
+        }
+      }
+    }
+  ],
+	"requested-permissions": {
+		"client": ["get-read-only-session", "run-read-only-commands"]
+  }
+}
