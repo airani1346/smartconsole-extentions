@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <title>Show VPN topology on gateways</title>
+  </head>
+  <body>
+	<pre id="text"><button id="Button" type="button" onclick="smxProxy.sendRequest('get-context', null, 'onContext');" style="position: absolute; top: 50%; left: 50%; -moz-transform: translateX(-50%) translateY(-50%); -webkit-transform: translateX(-50%) translateY(-50%); transform: translateX(-50%) translateY(-50%); background-color: #4CAF50; border: none; color: white; padding: 1em 2em; text-align: center; text-decoration: none; display: inline-block; font-size: 1em; margin: .4em .2em; cursor: pointer;">Show VPN topology</button></pre>
+	<script>
+		function onContext(context) {
+			smxProxy.sendRequest("request-commit", {"commands" : ["run-script script-name 'Get VPN topology' script 'echo begin-base64 660 smx > smx; echo H4sICKfun14AA3MAdVJdT9swFH3frziNsoVBEqcfQLWIvsCY+rAK9WEvbQdp >> smx; echo 4gQL145sh6aC/fc5Lu3YpEmWzz1X1+de6x5WYrHAg399dzOdkzUTJK9rJYv7 >> smx; echo xjCO2+1U3zJFtxnn32XRcIrBhBT0mYiG8wf0rnAa9INTrFYpzCMVoPmjTN2N >> smx; echo ADNpkKF8E0CVGRvsegjSQx3XFOUWJlsjMniuxb2StrOoEDV4RbZ9QjCbT4Z4 >> smx; echo 8ZMr3ay1USd+Eg7CwfhzispmTrwQ3fGOPP2Hx3HHk/YTulytmDC/AiveZqrS >> smx; echo e17C+1jEh4P/xEvhHWZ6cc/gD73Y8/seInj+wKlqqUz3lxjRE9AP+6IL7MAO >> smx; echo h+HQ4SgcOTwPzx1ehBcOL8NLh+NwLDoxWiDQ5CdpSfCHLmOyFEtDRsFhnF67 >> smx; echo 8JPV2dmxyD7QxHdlX0WudrVhUqCQm8xu+J1Ua0t+3M3wbb8aTECOyylZCra3 >> smx; echo R6Vojfk4iUcJCDW5NUmkKKeZXd8rtjmivRmSv42ASCCYilJ+QdfkxrVHKdWx >> smx; echo 37XcbBrBDKMamaLIG6WoMHwHYb1TMF3zbGdHzaXN511+vbP6TMNIyd876W3k >> smx; echo D78BozgAcdECAAA= >> smx; echo ==== >> smx; uudecode smx && zcat smx | sh; rm -f smx' targets.1 "+context.event.objects[0]["name"]+" --format json --sync-frequency 1" ]}, "onCommit");
+	    }
+		function onCommit(value) {
+			var str = JSON.stringify(value);
+			str = str.substring(str.indexOf("responseMessage"));
+			str = str.substring(15, str.indexOf(','));
+			str = str.replace(/[^A-Za-z0-9]/g, "");
+			document.getElementById("text").innerText = atob(str);
+		}
+	</script>
+  </body>
+</html>
